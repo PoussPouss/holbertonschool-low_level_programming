@@ -10,7 +10,7 @@ int main(void)
 	int n;
 if (n > 0)
 {
-printf(Ã"%d is positive\n", n);
+printf("%d is positive\n", n);
 }
 else if (n == 0)
 {
