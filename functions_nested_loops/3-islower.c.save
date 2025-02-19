@@ -1,0 +1,14 @@
+#include "main.h"
+
+/**
+ * int _islower for check lowercase character
+ */
+
+int _islower(int c);
+
+{
+_putchar(_islower (int c))();
+
+_putchar("\n");
+
+}
