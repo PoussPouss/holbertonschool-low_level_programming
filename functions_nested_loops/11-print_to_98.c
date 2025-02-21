@@ -3,36 +3,36 @@
 
 void print_to_98(int n)
 {
-int a;
+int i;
 
-
-	if (n == 98)
+	if (n <= 98)
 	{
 
-		for (a = n; a <= 98; a++)
+		for (i = n; i <= 98; i++)
+
 		{
-		printf("%d, " , a);
+
+		printf("%d, ", n);
+
 		}
 
 	}
-	else (n >= 98);
+
+	else
+
 	{
-	printf("%d, \n" , a);
 
-			for (a = n; a >= 98; a--)
-			{
-				if (a != 98)
+		for (i = n; i <= 98; i--)
 
-				_putchar(a);
-				_putchar(',');
-				_putchar(' ');
+		{
 
+		printf("%d, ", n);
 
-				else (a == 98);
-				_putchar('0');
-			}	_putchar('\n');
+		}
 
 	}
-	printf("98/n");
+
+printf("98\n");
+
 }
 
