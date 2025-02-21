@@ -12,7 +12,7 @@ int i;
 
 		{
 
-		printf("%d, ", n);
+		printf("%d, ", i);
 
 		}
 
@@ -26,7 +26,7 @@ int i;
 
 		{
 
-		printf("%d, ", n);
+		printf("%d, ", i);
 
 		}
 
