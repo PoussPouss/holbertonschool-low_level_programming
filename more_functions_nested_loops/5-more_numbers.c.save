@@ -1,0 +1,14 @@
+#include "main.h"
+#include <stdio.h>
+
+/**
+*print_numbers - its my protitype
+*/
+void print_numbers(void)
+{
+
+char i;
+
+	for (i = 48; i <= 57; i++)
+
+}
