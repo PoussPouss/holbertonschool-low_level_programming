@@ -1,6 +1,7 @@
 #include "main.h"
 /**
-*more_numbers - its my prototype
+*print_line - its my prototype
+*@n : variable into prototype
 */
 
 void print_line(int n)
