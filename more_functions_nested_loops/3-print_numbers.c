@@ -1,5 +1,9 @@
 #include "main.h"
 #include <stdio.h>
+
+/**
+*print_numbers - its my protitype
+*/
 void print_numbers(void)
 {
 
