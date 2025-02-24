@@ -1,6 +1,6 @@
 #include "main.h"
 /**
-*print_line - its my prototype
+*print_diagonal - its my prototype
 *@n : variable into prototype
 */
 
