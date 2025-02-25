@@ -1,14 +1,15 @@
 #include "main.h"
+#include <stddef.h>
 /**
-*print_rev - calculate the length of a string
+*print_rev -  prints a string in reverse
 *@s : variable into prototype
-*Return: the length of the string (excluding the null terminator)
+*Return: void
 */
 
 void print_rev(char *s)
 {
 int length = 0;
-
+int i;
 	if (s == NULL)
 	{
 	_putchar('\n');
@@ -20,7 +21,7 @@ int length = 0;
 	length++;
 	}
 
-	for (int i = length - 1; i >= 0; i--)
+	for (i = length - 1; i >= 0; i--)
 	{
 	_putchar(s[i]);
 	}
