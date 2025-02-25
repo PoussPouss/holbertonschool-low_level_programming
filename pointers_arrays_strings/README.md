@@ -1,0 +1,1 @@
+Readme pointers/ array/string
