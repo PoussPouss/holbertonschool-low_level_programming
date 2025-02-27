@@ -4,6 +4,7 @@
 *_strcpy - prototype string character
 *@dest: pointeurs variable
 *@src: variable
+*Return: initial dest
 */
 char *_strcpy(char *dest, char *src)
 
