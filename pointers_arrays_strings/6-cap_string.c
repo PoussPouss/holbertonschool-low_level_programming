@@ -1,46 +1,56 @@
 #include "main.h"
+
 /**
-* cap_string - Capitalise la première lettre de chaque mot d'une chaîne.
-* @str: La chaîne à traiter.
-* Return: La chaîne modifiée.
-*/
+ * cap_string - Capitalise la première lettre de chaque mot d'une chaîne.
+ * @str: La chaîne à traiter.
+ * Return: La chaîne modifiée.
+ */
 char *cap_string(char *str)
 {
-int i;
+    int i;
+    int in_word = 0;
+    int j;
+    char separators[] = {',', ';', '.', '!', '?', '"', '(', ')', '{', '}', ' ', '\t', '\n'};
 
-int in_word = 0;
+    
+    if (str[0] >= 'a' && str[0] <= 'z')
+    {
+        str[0] = str[0] - 32;
+    }
 
-int is_separator = 0;
+    
+    for (i = 1; str[i] != '\0'; i++)
+    {
+        int is_separator = 0; 
 
-int j;
+        
+        for (j = 0; separators[j] != '\0'; j++)
+        {
+            if (str[i] == separators[j])
+            {
+                is_separator = 1;
+                break;
+            }
+        }
 
-char separators[] = " \t\n,;.!?\"(){}";
+        
+        if (is_separator)
+        {
+            in_word = 0;
+        }
+        else if (str[i] >= 'a' && str[i] <= 'z' && in_word == 0)
+        {
+        
+            str[i] = str[i] - 32;
+            in_word = 1;
+        }
+        else
+        {
+            in_word = 1;
+        }
+    }
 
-	if (str[0] >= 'a' && str[0] <= 'z')
-	{
-		str[0] = str[0] - 32;
-	}
-
-	for (i = 1; str[i] != '\0'; i++)
-
-		for (j = 0; separators[j] != '\0'; j++)
-		{
-			if (str[i] == separators[j])
-			{
-				is_separator = 1;
-				break;
-			}
-		}
-
-			if (is_separator)
-			in_word = 0;
-
-		else if (str[i] >= 'a' && str[i] <= 'z' && in_word == 0)
-		in_word = 1;
-		else
-		in_word = 1;
-
-
-	return (str);
+    return str;
 }
+
 
