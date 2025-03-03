@@ -18,6 +18,6 @@ j += a[i * size + i];
 k += a[i * size + (size - 1 - i)];
 }
 
-printf("%d, %d", j, k);
+printf("%d, %d\n", j, k);
 
 }
