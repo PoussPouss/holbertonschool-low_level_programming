@@ -14,7 +14,7 @@ int i = 0;
 
 if (c == '\0')
 {
-return (s);
+return (0);
 }
 
 while (s[i] != '\0')
