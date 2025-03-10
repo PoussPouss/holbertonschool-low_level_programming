@@ -1,7 +1,5 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 /**
 * _strdup - Creates an array of chars and initializes it with a char
 * @str: The size of the array
@@ -13,16 +11,20 @@ char *_strdup(char *str)
 	char *dup_str;
 
 	int i;
+	int length = 0;
 
 	if (str == NULL)
 	return (NULL);
 
-	dup_str = malloc((strlen(str) + 1) * sizeof(char));
+	while (str[length] != '\0')
+	length++;
+
+	dup_str = malloc((length + 1) * sizeof(char));
 
 	if (dup_str == NULL)
 	return (NULL);
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; i < length; i++)
 	{
 		dup_str[i] = str[i];
 	}
