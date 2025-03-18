@@ -20,7 +20,7 @@ int (*get_op_func(char *s))(int, int)
 	};
 	int i = 0;
 
-	/* Vérifie que s est un seul caractère (plus le caractère nul) */
+
 	if (s[1] != '\0')
 		return (NULL);
 

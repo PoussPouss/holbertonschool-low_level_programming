@@ -2,7 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/**
+* main - Programme qui effectue des opérations arithmétiques simples
+* @argc: Nombre d'arguments passés au programme
+* @argv: Tableau des arguments (chaînes de caractères)
+*
+* Description: Ce programme effectue une opération mathématique entre deux
+* nombres entiers selon l'opérateur fourni. Les opérateurs valides sont:
+* +, -, *, / et %. Il vérifie également les erreurs comme un nombre
+* incorrect d'arguments, un opérateur invalide ou une division par zéro.
+*
+* Return: 0 en cas de succès, ou un code d'erreur:
+*         98 si nombre d'arguments incorrect
+*         99 si opérateur invalide
+*         100 si division/modulo par zéro
+*/
 int main(int argc, char *argv[])
 {
 	int (*op_func)(int, int);
@@ -34,4 +48,3 @@ int main(int argc, char *argv[])
 	printf("%d\n", op_func(num1, num2));
 	return (0);
 }
-
