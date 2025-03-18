@@ -1,17 +1,21 @@
-#include <stddef.h>
 #include "function_pointers.h"
+#include <stdio.h>
+
 /**
-* print_name - Applique une fonction à un nom donné
-* @name: Pointeur vers le nom à afficher
-* @f: Pointeur vers la fonction qui affiche le nom
-* Description: Cette fonction prend un pointeur vers une fonction
-* qui accepte une chaîne de caractères et l'exécute si elle est valide.
+* print_name - This function calls another function to print a name
+* @name: The name to print
+* @f: Pointer to function that prints a name
+*
+* Return: Nothing (void)
 */
 
 void print_name(char *name, void (*f)(char *))
 {
-	if (f != NULL && name != NULL)
+	if (name == NULL || f == NULL)
 	{
-		f(name);
+		return;
 	}
+
+		f(name);
+
 }
