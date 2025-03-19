@@ -57,7 +57,7 @@ void print_all(const char * const format, ...)
 	va_list args;
 	unsigned int i = 0;
 	unsigned int j = 0;
-	int first = 1;
+	char *sep = "";
 	print_func_t print_funcs[] = {
 		{'c', print_char},
 		{'i', print_int},
@@ -74,9 +74,9 @@ void print_all(const char * const format, ...)
 		{
 			if (format[i] == print_funcs[j].type)
 			{
-				printf("%s", first ? "" : ", ");
-				first = 0;
+				printf("%s", sep);
 				print_funcs[j].print_func(args);
+				sep = ", ";
 				break;
 			}
 			j++;
