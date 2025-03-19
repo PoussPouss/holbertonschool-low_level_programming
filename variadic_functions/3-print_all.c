@@ -35,6 +35,7 @@ void print_float(va_list args)
 * print_string - imprime une chaîne de caractères.
 * @args: Liste des arguments variadiques
 */
+
 void print_string(va_list args)
 {
 	char *ptr = va_arg(args, char*);
@@ -45,21 +46,12 @@ void print_string(va_list args)
 }
 
 /**
-* struct print_func - Structure defining a function based on format character
-* @type: The format character
-* @print_func: The function to call for printing
-*/
-typedef struct print_func
-{
-	char type;
-
-	void (*print_func)(va_list);
-} print_func_t;
-
-/**
 * print_all - prints anything based on format
 * @format: list of types of arguments passed to the function
+*          c: char, i: integer, f: float, s: string
+*          any other char should be ignored
 */
+
 void print_all(const char * const format, ...)
 {
 	va_list args;
