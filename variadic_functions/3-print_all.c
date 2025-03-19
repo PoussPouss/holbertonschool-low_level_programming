@@ -37,11 +37,11 @@ void print_float(va_list args)
 */
 void print_string(va_list args)
 {
-	char *str = va_arg(args, char*);
+	char *ptr = va_arg(args, char*);
 
-	if (str == NULL)
-		str = "(nil)";
-	printf("%s", str);
+	if (ptr == NULL)
+		ptr = "(nil)";
+	printf("%s", ptr);
 }
 
 /**
@@ -63,8 +63,8 @@ typedef struct print_func
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	int i = 0;
-	int j = 0;
+	unsigned int i = 0;
+	unsigned int j = 0;
 	int first = 1;
 	print_func_t print_funcs[] = {
 		{'c', print_char},
