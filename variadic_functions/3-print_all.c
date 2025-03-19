@@ -82,8 +82,7 @@ void print_all(const char * const format, ...)
 		{
 			if (format[i] == print_funcs[j].type)
 			{
-				if (first == 0)
-					printf(", ");
+				printf("%s", first ? "" : ", ");
 				first = 0;
 				print_funcs[j].print_func(args);
 				break;
