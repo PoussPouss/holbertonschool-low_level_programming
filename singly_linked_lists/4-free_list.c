@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * free_list - frees a linked list and its nodes
+ * @head: pointer to the head of the linked list
+ *
+ * Return: void
+ */
 void free_list(list_t *head)
 {
 	list_t *tmp;
