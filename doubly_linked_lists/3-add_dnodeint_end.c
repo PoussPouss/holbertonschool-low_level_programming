@@ -4,7 +4,7 @@
 #include <string.h>
 
 /**
-* add_dnodeint_end - Adds a new node at the beginning end of a doubly linked list
+* add_dnodeint_end - ajouter une node a la fin de la liste
 * @head: Pointer to pointer to the head of the list
 * @n: Value to store in the new node
 * Return: Address of the new element, or NULL if it fails
@@ -17,7 +17,6 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 
 	if (head == NULL)
 		return (NULL);
-
 
 	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
@@ -32,7 +31,6 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 		*head = new;
 		return (new);
 	}
-
 	temp = *head;
 	while (temp->next != NULL)
 	temp = temp->next;
