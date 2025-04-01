@@ -20,6 +20,7 @@ return;
 while (head != NULL)
 {
 tmp = head->next;
+free(head->str);
 free(head);
 head = tmp;
 }
