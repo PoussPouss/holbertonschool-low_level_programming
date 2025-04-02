@@ -29,20 +29,21 @@ int create_file(const char *filename, char *text_content)
 	return (-1);
 
 	if (text_content == NULL)
+    {
 	close(file_descriptor);
 	return (1);
+	}
 
-	{
 		while (text_content[text_length] != '\0')
 		text_length++;
 
 		write_status = write(file_descriptor, text_content, text_length);
-		if (write_status == -1 || write_status != text_length)
+		if (write_status != text_length || write_status == -1)
 		{
 			close(file_descriptor);
 			return (-1);
 		}
-	}
+
 
 	close(file_descriptor);
 	return (-1);
