@@ -1,50 +1,50 @@
 #include "main.h"
-#include <fcntl.h>
-#include <unistd.h>
+#include <fcntl.h>      /* for open */
+#include <unistd.h>     /* for write, close */
 #include <stdlib.h>
+
 /**
-* create_file - Crée un fichier avec le contenu spécifié
-* @filename: Nom du fichier à créer
-* @text_content: Chaîne de caractères terminée par NULL
-*
-* Description: Cette fonction crée un fichier avec les permissions rw-------
-* Si text_content est NULL, un fichier vide est créé.
-*
-* Return: 1 en cas de succès, -1 en cas d'échec
+* create_file - Creates a file and writes text content to it
+* @filename: Name of the file to create
+* @text_content: NULL-terminated string to write to the file
+* Return: 1 on success, -1 on failure
 */
 
 int create_file(const char *filename, char *text_content)
 {
-	int file_descriptor;
+	int fd;
 
-	ssize_t write_status;
+	ssize_t w_bytes;
 
-	int text_length = 0;
+	int length = 0;
+
 
 	if (filename == NULL)
-	return (-1);
+		return (-1);
 
-	file_descriptor = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	if (file_descriptor == -1)
-	return (-1);
+
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (fd == -1)
+		return (-1);
 
 	if (text_content == NULL)
 	{
-	close(file_descriptor);
-	return (1);
+		close(fd);
+		return (1);
 	}
 
-		while (text_content[text_length] != '\0')
-		text_length++;
 
-		write_status = write(file_descriptor, text_content, text_length);
-		if (write_status != text_length || write_status == -1)
-		{
-			close(file_descriptor);
-			return (-1);
-		}
+	while (text_content[length] != '\0')
+	length++;
 
 
-	close(file_descriptor);
-	return (-1);
+	w_bytes = write(fd, text_content, length);
+	if (w_bytes != length || w_bytes == -1)
+	{
+		close(fd);
+		return (-1);
+	}
+
+	close(fd);
+	return (1);
 }
