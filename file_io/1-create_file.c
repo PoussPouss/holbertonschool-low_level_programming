@@ -3,15 +3,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 /**
- * create_file - Crée un fichier avec le contenu spécifié
- * @filename: Nom du fichier à créer
- * @text_content: Chaîne de caractères terminée par NULL
- *
- * Description: Cette fonction crée un fichier avec les permissions rw-------
- * Si text_content est NULL, un fichier vide est créé.
- *
- * Return: 1 en cas de succès, -1 en cas d'échec
- */
+* create_file - Crée un fichier avec le contenu spécifié
+* @filename: Nom du fichier à créer
+* @text_content: Chaîne de caractères terminée par NULL
+*
+* Description: Cette fonction crée un fichier avec les permissions rw-------
+* Si text_content est NULL, un fichier vide est créé.
+*
+* Return: 1 en cas de succès, -1 en cas d'échec
+*/
 
 int create_file(const char *filename, char *text_content)
 {
@@ -28,9 +28,12 @@ int create_file(const char *filename, char *text_content)
 	if (file_descriptor == -1)
 	return (-1);
 
-	if (text_content != NULL)
+	if (text_content == NULL)
+	close(file_descriptor);
+	return (1);
+
 	{
-		while (text_content[text_length])
+		while (text_content[text_length] != '\0')
 		text_length++;
 
 		write_status = write(file_descriptor, text_content, text_length);
