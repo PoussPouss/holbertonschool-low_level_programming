@@ -83,10 +83,16 @@ void copy_content(int file_from, int file_to, char *argv[])
 void close_files(int file_from, int file_to, char *argv[])
 {
 	if (close(file_from) == -1)
-		error_file(file_from, -1, argv, 100);
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
 
 	if (close(file_to) == -1)
-		error_file(file_to, -1, argv, 100);
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
+		exit(100);
+	}
 }
 
 /**
