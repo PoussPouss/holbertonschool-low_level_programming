@@ -34,8 +34,6 @@ void error_file(int fd, int file_to, char *argv[], int code)
 		exit(100);
 	}
 
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
 }
 
 
