@@ -65,13 +65,15 @@ void copy_content(int file_from, int file_to, char *argv[])
 
 	while ((n_read = read(file_from, buffer, sizeof(buffer))) > 0)
 	{
-		n_write = write(file_to, buffer, n_read);
-		if (n_write == -1 || n_write != n_read)
+		if (file_to == -1)
 			error_file(file_from, file_to, argv, 99);
-	}
+		n_write = write(file_from, buffer, n_read);
 
-	if (n_read == -1)
+		if (n_write == -1 || n_write != n_read)
 		error_file(file_from, file_to, argv, 98);
+	}
+	if (n_read == -1)
+	error_file(file_from, file_to, argv, 98);
 }
 
 /**
