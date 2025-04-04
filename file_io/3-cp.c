@@ -33,10 +33,7 @@ void error_file(int fd, int file_to, char *argv[], int code)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
-
 }
-
-
 /**
 * open_files - Ouvre les fichiers source et destination
 * @argv: Arguments du programme
@@ -65,7 +62,7 @@ void copy_content(int file_from, int file_to, char *argv[])
 	ssize_t n_read, n_write;
 	char buffer[1024];
 
-	while ((n_read = read(file_from, buffer, 1024)) > 0)
+	while ((n_read = read(file_from, buffer, sizeof(buffer))) > 0)
 	{
 		n_write = write(file_to, buffer, n_read);
 		if (n_write == -1 || n_write != n_read)
