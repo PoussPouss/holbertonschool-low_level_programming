@@ -4,16 +4,36 @@
 #include <fcntl.h>
 
 /**
-* error_exit - Affiche un message d'erreur et quitte le programme
-* @message: Message d'erreur à afficher
-* @code: Code de sortie
+* error_file - Gère les erreurs liées aux fichiers et quitte le programme
+* @fd: Descripteur du fichier source
+* @file_to: Descripteur du fichier destination
+* @argv: Arguments du programme
+* @code: Code d'erreur
 */
-void error_exit(char *message, int code)
+void error_file(int fd, int file_to, char *argv[], int code)
 {
-	dprintf(STDERR_FILENO, "%s", message);
-	exit(code);
+	if (code == 98)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		if (fd != -1)
+			close(fd);
+		exit(98);
+	}
+	if (code == 99)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		if (fd != -1)
+			close(fd);
+		if (file_to != -1)
+			close(file_to);
+		exit(99);
+	}
+	if (code == 100)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
 }
-
 /**
 * open_files - Ouvre les fichiers source et destination
 * @argv: Arguments du programme
@@ -24,22 +44,20 @@ void open_files(char *argv[], int *file_from, int *file_to)
 {
 	*file_from = open(argv[1], O_RDONLY);
 	if (*file_from == -1)
-		error_exit("Error: Can't read from file ", 98);
+		error_file(*file_from, *file_to, argv, 98);
 
 	*file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (*file_to == -1)
-	{
-		close(*file_from);
-		error_exit("Error: Can't write to file ", 99);
-	}
+		error_file(*file_from, *file_to, argv, 99);
 }
 
 /**
 * copy_content - Copie le contenu d'un fichier à l'autre
 * @file_from: Descripteur du fichier source
 * @file_to: Descripteur du fichier destination
+* @argv: Arguments du programme
 */
-void copy_content(int file_from, int file_to)
+void copy_content(int file_from, int file_to, char *argv[])
 {
 	ssize_t n_read, n_write;
 	char buffer[1024];
@@ -48,24 +66,26 @@ void copy_content(int file_from, int file_to)
 	{
 		n_write = write(file_to, buffer, n_read);
 		if (n_write == -1 || n_write != n_read)
-			error_exit("Error: Can't write to file ", 99);
+			error_file(file_from, file_to, argv, 99);
 	}
+
 	if (n_read == -1)
-		error_exit("Error: Can't read from file ", 98);
+		error_file(file_from, file_to, argv, 98);
 }
 
 /**
 * close_files - Ferme les descripteurs de fichiers
 * @file_from: Descripteur du fichier source
 * @file_to: Descripteur du fichier destination
+* @argv: Arguments du programme
 */
-void close_files(int file_from, int file_to)
+void close_files(int file_from, int file_to, char *argv[])
 {
 	if (close(file_from) == -1)
-		error_exit("Error: Can't close fd ", 100);
+		error_file(file_from, -1, argv, 100);
 
 	if (close(file_to) == -1)
-		error_exit("Error: Can't close fd ", 100);
+		error_file(file_to, -1, argv, 100);
 }
 
 /**
@@ -77,14 +97,18 @@ void close_files(int file_from, int file_to)
 */
 int main(int argc, char *argv[])
 {
-	int file_from, file_to;
+	int file_from = -1, file_to = -1;
 
+	/* Vérifie le nombre d'arguments */
 	if (argc != 3)
-		error_exit("Usage: cp file_from file_to\n", 97);
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
 
 	open_files(argv, &file_from, &file_to);
-	copy_content(file_from, file_to);
-	close_files(file_from, file_to);
+	copy_content(file_from, file_to, argv);
+	close_files(file_from, file_to, argv);
 
 	return (0);
 }
