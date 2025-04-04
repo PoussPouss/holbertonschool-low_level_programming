@@ -68,7 +68,7 @@ void copy_content(int file_from, int file_to, char *argv[])
 	while ((n_read = read(file_from, buffer, 1024)) > 0)
 	{
 		n_write = write(file_to, buffer, n_read);
-		if (n_write != n_read)
+		if (n_write == -1 || n_write != n_read)
 			error_file(file_from, file_to, argv, 99);
 	}
 
