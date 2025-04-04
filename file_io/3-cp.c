@@ -42,6 +42,7 @@ void error_file(int fd, int file_to, char *argv[], int code)
 */
 void open_files(char *argv[], int *file_from, int *file_to)
 {
+	*file_to = -1;
 	*file_from = open(argv[1], O_RDONLY);
 	if (*file_from == -1)
 		error_file(*file_from, *file_to, argv, 98);
