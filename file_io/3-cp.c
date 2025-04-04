@@ -34,6 +34,7 @@ void error_file(int fd, int file_to, char *argv[], int code)
 		exit(100);
 	}
 }
+
 /**
 * open_files - Ouvre les fichiers source et destination
 * @argv: Arguments du programme
@@ -42,7 +43,6 @@ void error_file(int fd, int file_to, char *argv[], int code)
 */
 void open_files(char *argv[], int *file_from, int *file_to)
 {
-	*file_to = -1;
 	*file_from = open(argv[1], O_RDONLY);
 	if (*file_from == -1)
 		error_file(*file_from, *file_to, argv, 98);
@@ -65,15 +65,13 @@ void copy_content(int file_from, int file_to, char *argv[])
 
 	while ((n_read = read(file_from, buffer, sizeof(buffer))) > 0)
 	{
-		if (file_to == -1)
-			error_file(file_from, file_to, argv, 99);
-		n_write = write(file_from, buffer, n_read);
-
+		n_write = write(file_to, buffer, n_read);
 		if (n_write == -1 || n_write != n_read)
-		error_file(file_from, file_to, argv, 98);
+			error_file(file_from, file_to, argv, 99);
 	}
+
 	if (n_read == -1)
-	error_file(file_from, file_to, argv, 98);
+		error_file(file_from, file_to, argv, 98);
 }
 
 /**
