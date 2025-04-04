@@ -5,35 +5,39 @@
 
 /**
 * error_file - Gère les erreurs liées aux fichiers et quitte le programme
-* @file_from: Descripteur du fichier source
+* @fd: Descripteur du fichier source
 * @file_to: Descripteur du fichier destination
 * @argv: Arguments du programme
 * @code: Code d'erreur
 */
-void error_file(int file_from, int file_to, char *argv[], int code)
+void error_file(int fd, int file_to, char *argv[], int code)
 {
 	if (code == 98)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		if (file_from != -1)
-			close(file_from);
+		if (fd != -1)
+			close(fd);
 		exit(98);
 	}
 	if (code == 99)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		if (file_from != -1)
-			close(file_from);
+		if (fd != -1)
+			close(fd);
 		if (file_to != -1)
 			close(file_to);
 		exit(99);
 	}
 	if (code == 100)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
+
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
 }
+
 
 /**
 * open_files - Ouvre les fichiers source et destination
